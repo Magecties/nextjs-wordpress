@@ -1,0 +1,13 @@
+.hero {
+  max-width: 42rem;
+  margin-bottom: 3rem;
+}
+
+.hero h1 {
+  font-size: 3rem;
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 1.25rem;
+}

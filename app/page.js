@@ -1,8 +1,15 @@
+import styles from "./page.module.css";
+
 export default function Home() {
   return (
     <main>
-      <h1>Hej med dig</h1>
-      <p>Jeg bygger et hus.</p>
+      <section className={styles.hero}>
+        <h1>Stories from Aarhus</h1>
+        <p>
+          City walks, food and places worth a visit. The content is written in
+          WordPress and presented with Next.js.
+        </p>
+      </section>
     </main>
   );
 }

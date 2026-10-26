@@ -1,4 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,14 +14,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Mit WordPress-site",
-  description: "Et dansk site bygget med Next.js og headless WordPress.",
+  title: "Headless WordPress",
+  description:
+    "A Next.js app that fetches content from WordPress through the REST API",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="da" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
