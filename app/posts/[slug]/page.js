@@ -1,33 +1,23 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getPostBySlug } from "@/lib/wordpress";
+import { formatDate } from "@/lib/format";
 import styles from "./page.module.css";
 
 export default async function PostPage({ params }) {
   const { slug } = await params;
-  const response = await fetch(
-    `${process.env.WORDPRESS_URL}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}`,
-  );
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch post: ${response.status}`);
-  }
-
-  const posts = await response.json();
-  const post = posts[0];
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
-  const date = new Date(post.date).toLocaleDateString("da-DK", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  const date = formatDate(post.date);
 
   return (
     <main>
       <article className={styles.post}>
+        <Link href="/posts">← All posts</Link>
         <time className={styles.date} dateTime={post.date}>
           {date}
         </time>
@@ -36,9 +26,6 @@ export default async function PostPage({ params }) {
           className="wp-content"
           dangerouslySetInnerHTML={{ __html: post.content.rendered }}
         />
-        <p>
-          <Link href="/posts">Back to posts</Link>
-        </p>
       </article>
     </main>
   );

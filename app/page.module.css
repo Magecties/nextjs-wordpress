@@ -11,3 +11,12 @@
   color: var(--muted);
   font-size: 1.25rem;
 }
+
+.heading {
+  font-size: 1.5rem;
+}
+
+.more {
+  margin-top: 2rem;
+  font-weight: 600;
+}

@@ -1,12 +1,9 @@
 import Link from "next/link";
+import { formatDate } from "@/lib/format";
 import styles from "./PostCard.module.css";
 
 export default function PostCard({ post }) {
-  const date = new Date(post.date).toLocaleDateString("da-DK", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  const date = formatDate(post.date);
 
   return (
     <article className={styles.card}>

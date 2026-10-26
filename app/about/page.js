@@ -1,12 +1,24 @@
+import { notFound } from "next/navigation";
+import { getPageBySlug } from "@/lib/wordpress";
+
 export const metadata = {
   title: "About",
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const page = await getPageBySlug("about");
+
+  if (!page) {
+    notFound();
+  }
+
   return (
     <main>
-      <h1>About</h1>
-      <p>The About page from WordPress will be shown here.</p>
+      <h1 dangerouslySetInnerHTML={{ __html: page.title.rendered }} />
+      <div
+        className="wp-content"
+        dangerouslySetInnerHTML={{ __html: page.content.rendered }}
+      />
     </main>
   );
 }
